@@ -1,7 +1,9 @@
 # 3r-hmr-starting-point
 
-- [ ] React
+This repo is currently under heavy development and is not finished.
+
+- [x] React
 - [ ] Redux
-- [ ] React-Router
-- [ ] Hot Module Replacement 3
-- [ ] Styletron
+- [x] React-Router
+- [x] Hot Module Replacement 3
+- [x] Styletron

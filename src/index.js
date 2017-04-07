@@ -29,3 +29,7 @@ const render = (Component) =>
 
 render(App)
 if (module.hot) module.hot.accept('containers/App', () => render(App))
+
+
+// when you get to Redux, check out
+// https://github.com/nganbread/bare-minimum-react-hot-rr4-redux
