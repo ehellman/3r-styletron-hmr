@@ -6,11 +6,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Landing from 'components/Landing'
 import Search from 'containers/Search'
-// import { styled } from 'styletron-react'
-//
-// const Container = styled('header', (props) => ({
-//   backgroundColor: '#333333'
-// }))
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
