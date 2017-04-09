@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
+const { arrayOf, shape, string } = React.PropTypes
 
-import preload from 'data.json'
-
+import Header from 'components/Header'
 import ShowCard from 'components/ShowCard'
-console.log(preload)
-
-// {/* <pre><code>{JSON.stringify(preload, null, 4)}</code></pre> */}
 
 export default class Search extends Component {
   constructor (props) {
@@ -23,17 +20,13 @@ export default class Search extends Component {
   render () {
     return (
       <div className='search'>
-        <header>
-          <h1>svideo</h1>
-          <input
-            value={this.state.searchTerm}
-            onChange={this.handleSearchTermChange}
-            type='text'
-            placeholder='search'
-          />
-        </header>
+        <Header
+          showSearch
+          searchTerm={this.state.searchTerm}
+          handleSearchTermChange={this.handleSearchTermChange}
+        />
         <div>
-          {preload.shows
+          {this.props.shows
             .filter(show => `${show.title} ${show.description}`
               .toUpperCase()
               .indexOf(this.state.searchTerm.toUpperCase()) >= 0
@@ -50,7 +43,16 @@ export default class Search extends Component {
   }
 }
 
-// stopped at 28 - 01:00
+Search.propTypes = {
+  shows: arrayOf(shape({
+    title: string,
+    description: string
+  }))
+}
+
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\
+// stopped at 50 - 02:00   ||
+////////////////////////////
 // just got webpack to accept image urls by adding publicPath for '/dist'
 // read more about this part before deleting this comment, then put the relevant
 // info as a comment in the webpack file
