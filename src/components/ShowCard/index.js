@@ -8,15 +8,16 @@ const ShowCard = (props) => {
     year,
     description,
     imdbID
-  } = this.props
+  } = props
   return (
-    <Link to=`/details/${this.props.imdbID}`>
+    <Link to={`/details/${props.imdbID}`}>
       <div className='show-card'>
         <img src={`/dist/img/posters/${poster}`} />
         <div>
           <h3>{title}</h3>
           <h4>({year})</h4>
           <p>{description}</p>
+          <p>{imdbID}</p>
         </div>
       </div>
     </Link>

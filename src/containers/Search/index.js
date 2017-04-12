@@ -46,13 +46,12 @@ export default class Search extends Component {
 Search.propTypes = {
   shows: arrayOf(shape({
     title: string,
-    description: string
+    description: string,
+    imdbID: string
   }))
 }
 
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\
-// stopped at 50 - 02:00   ||
-////////////////////////////
+// stopped at 50 - 02:00
 // just got webpack to accept image urls by adding publicPath for '/dist'
 // read more about this part before deleting this comment, then put the relevant
 // info as a comment in the webpack file

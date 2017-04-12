@@ -32,3 +32,8 @@ if (module.hot) module.hot.accept('containers/App', () => render(App))
 
 // when you get to Redux, check out
 // https://github.com/nganbread/bare-minimum-react-hot-rr4-redux
+
+// code splitting
+// https://github.com/ModusCreateOrg/react-dynamic-route-loading-es6
+// http://moduscreate.com/code-splitting-for-react-router-with-es6-imports/
+// https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-2-page-load-performance-33b932d97cf2
