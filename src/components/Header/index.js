@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { setSearchTerm } from 'actions'
 import { Link } from 'react-router-dom'
 
-export default class Header extends Component {
+class Header extends Component {
+  constructor (props) {
+    super(props)
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this)
+  }
+  handleSearchTermChange (event) {
+    this.props.dispatch(setSearchTerm(event.target.value))
+  }
   render () {
     let utilSpace
     this.props.showSearch
       ? utilSpace =
         <input
           value={this.props.searchTerm}
-          onChange={this.props.handleSearchTermChange}
+          onChange={this.handleSearchTermChange}
           type='text'
           placeholder='search'
         />
@@ -34,7 +43,15 @@ export default class Header extends Component {
 
 const { func, bool, string } = React.PropTypes
 Header.propTypes = {
-  handleSearchTermChange: func,
+  dispatch: func,
   showSearch: bool,
   searchTerm: string
 }
+
+const mapStateToProps = (state) => {
+  return {
+    searchTerm: state.searchTerm
+  }
+}
+
+export default connect(mapStateToProps)(Header)

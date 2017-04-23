@@ -30,6 +30,8 @@ const render = (Component) =>
 render(App)
 if (module.hot) module.hot.accept('containers/App', () => render(App))
 
+// LEFT OFF AT 62, 02:28 (rewind a bit, working in Landing.js)
+
 // when you get to Redux, check out
 // https://github.com/nganbread/bare-minimum-react-hot-rr4-redux
 

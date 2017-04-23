@@ -1,35 +1,18 @@
 import React, { Component } from 'react'
-const { arrayOf, shape, string } = React.PropTypes
-
+import { connect } from 'react-redux'
 import Header from 'components/Header'
 import ShowCard from 'components/ShowCard'
 
-export default class Search extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      searchTerm: ''
-    }
-    this.handleSearchTermChange = this.handleSearchTermChange.bind(this)
-  }
-  handleSearchTermChange (event) {
-    this.setState({
-      searchTerm: event.target.value
-    })
-  }
+class Search extends Component {
   render () {
     return (
       <div className='search'>
-        <Header
-          showSearch
-          searchTerm={this.state.searchTerm}
-          handleSearchTermChange={this.handleSearchTermChange}
-        />
+        <Header showSearch />
         <div>
           {this.props.shows
             .filter(show => `${show.title} ${show.description}`
               .toUpperCase()
-              .indexOf(this.state.searchTerm.toUpperCase()) >= 0
+              .indexOf(this.props.searchTerm.toUpperCase()) >= 0
             )
             .map(show => {
               return (
@@ -43,14 +26,23 @@ export default class Search extends Component {
   }
 }
 
+const { arrayOf, shape, string } = React.PropTypes
 Search.propTypes = {
   shows: arrayOf(shape({
     title: string,
     description: string,
     imdbID: string
-  }))
+  })),
+  searchTerm: string
 }
 
+const mapStateToProps = (state) => {
+  return {
+    searchTerm: state.searchTerm
+  }
+}
+
+export default connect(mapStateToProps)(Search)
 // stopped at 50 - 02:00
 // just got webpack to accept image urls by adding publicPath for '/dist'
 // read more about this part before deleting this comment, then put the relevant
