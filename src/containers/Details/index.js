@@ -1,26 +1,13 @@
 import React, { Component } from 'react'
 import Header from 'components/Header'
+import { connect } from 'react-redux'
+import { getOmdbDetails } from 'actions'
 
-import axios from 'axios'
-
-export default class Details extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      omdbData: {
-
-      }
-    }
-  }
+class Details extends Component {
   componentDidMount () {
-    axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
-      .then(response => {
-        console.log(response)
-        this.setState({
-          omdbData: response.data
-        })
-      })
-      .catch(error => console.error('axios error', error))
+    if (!this.props.omdbData.imdbRating) {
+      this.props.dispatch(getOmdbDetails(this.props.show.imdbID))
+    }
   }
   render () {
     const {
@@ -31,8 +18,8 @@ export default class Details extends Component {
       trailer
     } = this.props.show
     let rating
-    this.state.omdbData.imdbRating
-      ? rating = <h3>{this.state.omdbData.imdbRating}</h3>
+    this.props.omdbData.imdbRating
+      ? rating = <h3>{this.props.omdbData.imdbRating}</h3>
       : rating = <img src='/public/image/loading.png' alt='loading' />
     return (
       <div className='details'>
@@ -52,7 +39,7 @@ export default class Details extends Component {
   }
 }
 
-const { shape, string } = React.PropTypes
+const { shape, string, func } = React.PropTypes
 
 Details.propTypes = {
   show: shape({
@@ -62,5 +49,20 @@ Details.propTypes = {
     poster: string,
     trailer: string,
     imdbID: string
-  })
+  }),
+  omdbData: shape({
+    imdbID: string
+  }),
+  dispatch: func
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const omdbData = state.omdbData[ownProps.show.imdbID]
+    ? state.omdbData[ownProps.show.imdbID]
+    : {}
+
+  return {
+    omdbData: omdbData
+  }
+}
+export default connect(mapStateToProps)(Details)
